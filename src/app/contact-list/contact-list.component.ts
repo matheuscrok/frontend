@@ -8,16 +8,18 @@ import { DataService } from '../data.service';
 })
 export class ContactListComponent implements OnInit {
 
-  contacts: { id: any; name: any; description: any; email: any; }[]=[];
-  selectedContact: any;
+  contacts:any;
+  selectedContact:any;
 
   constructor(public dataService: DataService) { }
 
   ngOnInit() {
-    this.contacts = this.dataService.getContacts();
-  }
+    this.dataService.getContacts().subscribe(resposta => {
+    this.contacts = resposta;
+    });
+    }
 
-  public selectContact(contact: any) {
+  public selectContact(contact:any) {
     this.selectedContact = contact;
   }
 
