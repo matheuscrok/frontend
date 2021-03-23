@@ -17,19 +17,28 @@
                 <td> {{ contact.email }}</td>
                 <td>
                     <button class="btn btn-primary" (click)="selectContact(contact)"> Mostrar detalhes</button>
+                    <button class="btn btn-primary" (click)="excluir=true"> Excluir</button>
+                    <button *ngIf="excluir" class="btn btn-primary" (click)="deleteContact(contact)"> Confirmar Exclusão</button>
                 </td>
+
             </tr>
         </tbody>
     </table>
     <div class="card text-center" *ngIf="selectedContact">
         <div class="card-header">
             # {{selectedContact.id}}
+            <button *ngIf="!edicao" class="btn btn-primary" (click)="editar()"> Editar</button>
         </div>
         <div class="card-block">
+            <label for="name">Nome do contato</label>
+            <input [(ngModel)]="selectedContact.name" type="text" name="name" class="form-control" id="name"
+                aria-describedby="nameHelp" placeholder="Digite o nome">
             <h4 class="card-title">{{selectedContact.name}}</h4>
             <p class="card-text">
                 {{selectedContact.description}}
             </p>
+            <button *ngIf="edicao" class="btn btn-primary" (click)="salvar()"> Salvar</button>
+            <button *ngIf="edicao" class="btn btn-primary" (click)="cancelar()"> Cancelar</button>
         </div>
 
     </div>
